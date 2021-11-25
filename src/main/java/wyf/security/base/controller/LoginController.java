@@ -7,37 +7,29 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 /**
 *@Description 用于用户登录登出
 *@Author weiyifei
 *@date 2021/11/13
 */
-@RestController
-@RequestMapping("/user")
+@Controller
 @Slf4j
 public class LoginController {
 
 
 
-    @GetMapping("/info")
-    public Authentication userInfo(){
-        SecurityContext context = SecurityContextHolder.getContext();
+   @GetMapping("/login")
+   public String login(){
+       return "login";
+   }
 
-        Authentication authentication = context.getAuthentication();
-
-        System.out.println(authentication.toString());
-
-        return authentication;
-    }
-
-    @GetMapping("/hello")
-    @PreAuthorize("hasRole('YOUKE')")
+    @ResponseBody
+    @PostMapping("/hello")
     public String hello(){
-        return "hello friend ,im was left out";
+        return "hello security";
     }
 
 }
