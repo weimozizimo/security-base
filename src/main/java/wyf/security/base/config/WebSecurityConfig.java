@@ -13,20 +13,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth->
-                auth.mvcMatchers("/user/**").authenticated()
-        .anyRequest().denyAll())
-        .anonymous().authorities("YOUKE")
-        .and()
-        .authenticationProvider();
-    }
+
 
     @Bean
     public UserDetailsService userDetailsService(){
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withDefaultPasswordEncoder().username("user").password("123456").roles("ADMIN").build());
+        manager.createUser(User.withDefaultPasswordEncoder()
+                .username("user") //配置用户名
+                .password("123456") //配置密码
+                .roles("ADMIN") //配置拥有的角色
+                .build());
         return manager;
     }
 }
