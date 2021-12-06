@@ -1,6 +1,7 @@
 package wyf.security.base.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,10 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     auth.mvcMatchers("/login","login.html").permitAll()
                             .anyRequest().authenticated();
                 })
-                .formLogin(form->{
-            form.loginPage("/login")
-                    .successForwardUrl("/hello");
-        });
+                .httpBasic(Customizer.withDefaults());
     }
 
     @Bean

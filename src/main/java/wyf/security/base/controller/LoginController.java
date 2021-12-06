@@ -27,7 +27,7 @@ public class LoginController {
    }
 
     @ResponseBody
-    @PostMapping("/hello")
+    @GetMapping("/hello")
     public String hello(){
         return "hello security";
     }
